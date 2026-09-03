@@ -1,0 +1,23 @@
+{
+  "title": "Demo companies",
+  "primary_key": [
+    "company_id"
+  ],
+  "fields": {
+    "sample_order": {
+      "type": "integer",
+      "description": "Stable display order."
+    },
+    "company_id": {
+      "type": "string",
+      "description": "Wind-style stock code and stable join key."
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "technology_field": {
+      "type": "string"
+    }
+  },
+  "schema_version": "1.0.0"
+}

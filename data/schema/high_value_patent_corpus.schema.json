@@ -1,0 +1,81 @@
+{
+  "title": "High-value patent reference corpus",
+  "primary_key": [
+    "record_id"
+  ],
+  "fields": {
+    "record_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "patent_title": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "company_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "stock_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "assignee": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "grant_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "grant_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "patent_type": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "legal_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ipc_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "technology_field": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "patent_abstract": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "schema_version": "1.0.0"
+}

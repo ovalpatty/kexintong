@@ -1,0 +1,70 @@
+{
+  "title": "Reported quarterly financial statements",
+  "primary_key": [
+    "company_id",
+    "reporting_period"
+  ],
+  "currency": "CNY",
+  "amount_unit": "CNY 100 million",
+  "important_note": "Values preserve the source statement basis and are reported cumulative year-to-date, not derived standalone-quarter flows.",
+  "fields": {
+    "company_id": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "reporting_period": {
+      "type": "string",
+      "format": "YYYYQn"
+    },
+    "fiscal_year": {
+      "type": "integer"
+    },
+    "fiscal_quarter": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "period_end": {
+      "type": "date"
+    },
+    "value_basis": {
+      "type": "string",
+      "enum": [
+        "reported_cumulative_ytd"
+      ]
+    },
+    "revenue_cny_100m": {
+      "type": "number"
+    },
+    "operating_cost_cny_100m": {
+      "type": "number"
+    },
+    "selling_expense_cny_100m": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "management_expense_cny_100m": {
+      "type": "number"
+    },
+    "finance_expense_cny_100m": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "rd_expense_cny_100m": {
+      "type": "number"
+    },
+    "operating_cash_flow_cny_100m": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "schema_version": "1.0.0"
+}

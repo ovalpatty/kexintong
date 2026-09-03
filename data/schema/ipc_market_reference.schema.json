@@ -1,0 +1,18 @@
+{
+  "title": "Market IPC reference",
+  "fields": {
+    "company_id": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "ipc_code": {
+      "type": "string"
+    },
+    "patent_count": {
+      "type": "integer"
+    }
+  },
+  "schema_version": "1.0.0"
+}

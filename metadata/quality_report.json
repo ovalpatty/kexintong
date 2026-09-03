@@ -1,0 +1,57 @@
+{
+  "status": "PASS_WITH_NOTES",
+  "generated_at": "2026-09-03T13:03:24+08:00",
+  "checks": {
+    "selected_company_count": 5,
+    "demo_patent_rows": 3911,
+    "demo_financial_rows": 95,
+    "high_value_patent_rows": 198,
+    "ipc_reference_rows": 1593,
+    "industry_reference_rows": 16,
+    "raw_material_rows": 5,
+    "duplicate_company_ids": 0,
+    "duplicate_financial_keys": 0,
+    "duplicate_patent_application_keys": 0,
+    "missing_core_financial_values": {
+      "revenue_cny_100m": 0,
+      "operating_cost_cny_100m": 0,
+      "management_expense_cny_100m": 0,
+      "finance_expense_cny_100m": 0,
+      "rd_expense_cny_100m": 0
+    },
+    "missing_reporting_periods_by_company": {
+      "000157.SZ": [
+        "2025Q4"
+      ],
+      "000333.SZ": [
+        "2025Q4"
+      ],
+      "002230.SZ": [
+        "2025Q4"
+      ],
+      "002273.SZ": [
+        "2025Q4"
+      ],
+      "300760.SZ": [
+        "2025Q4"
+      ]
+    },
+    "company_patent_abstracts_available": 0,
+    "company_patent_titles_available": 3911,
+    "high_value_patent_abstracts_available": 198,
+    "selected_field_reference_coverage": {
+      "人工智能": 14,
+      "光学技术": 5,
+      "机械制造": 16,
+      "生物医药": 14,
+      "电子电气": 13
+    }
+  },
+  "notes": [
+    "All five selected companies have patent records and 19 financial reporting periods.",
+    "The source company-level patent file does not provide patent abstracts; patent titles are retained for text demonstration.",
+    "The high-value reference corpus contains patent abstracts and covers every selected technology field.",
+    "Financial values preserve the source cumulative year-to-date reporting basis.",
+    "Selection metadata contains full-research scores only to document sample selection and is not a model input."
+  ]
+}

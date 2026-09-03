@@ -1,0 +1,6 @@
+﻿sample_order,company_id,company_name,technology_field,research_patent_score,research_bep_margin,research_revenue_cagr,research_quadrant,demo_patent_rows,demo_financial_rows,selection_reason,usage_note
+1,002230.SZ,科大讯飞,人工智能,100.0,2.262186986380552,0.2181357730190234,技术待变现,2000,19,High patent score and large patent portfolio; technology-yet-to-monetize segment.,Selection metadata only; not a model input.
+2,300760.SZ,迈瑞医疗,生物医药,32.69,5.511686014647817,0.1058314147390094,优质标的,83,19,Biomedical representative in the preferred-borrower segment.,Selection metadata only; not a model input.
+3,002273.SZ,水晶光电,光学技术,0.0,3.402764833532534,0.2178007571018421,财务韧性强,7,19,Low patent count and score but stronger financial resilience.,Selection metadata only; not a model input.
+4,000157.SZ,中联重科,机械制造,20.35,2.621459618816113,-0.09262206973790399,双重风险,87,19,Mechanical-manufacturing representative in the dual-risk segment.,Selection metadata only; not a model input.
+5,000333.SZ,美的集团,电子电气,18.56,4.327677829878681,0.06962341908276781,财务韧性强,1734,19,Large patent portfolio with strong financial resilience; contrasts raw volume with composite score.,Selection metadata only; not a model input.

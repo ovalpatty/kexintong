@@ -1,0 +1,50 @@
+{
+  "title": "Industry BEP reference",
+  "amount_unit": "CNY 100 million",
+  "percentage_unit": "0-100 percent points",
+  "fields": {
+    "industry": {
+      "type": [
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "avg_revenue_cny_100m": {
+      "type": [
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "avg_operating_cost_cny_100m": {
+      "type": [
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "avg_cost_ratio_pct": {
+      "type": [
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "avg_gross_margin_pct": {
+      "type": [
+        "number",
+        "string",
+        "null"
+      ]
+    },
+    "avg_bep_revenue_cny_100m": {
+      "type": [
+        "number",
+        "string",
+        "null"
+      ]
+    }
+  },
+  "schema_version": "1.0.0"
+}

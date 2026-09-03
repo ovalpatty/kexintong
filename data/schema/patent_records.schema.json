@@ -1,0 +1,58 @@
+{
+  "title": "Company-level patent records",
+  "recommended_key": [
+    "company_id",
+    "application_number"
+  ],
+  "date_format": "YYYY-MM-DD",
+  "fields": {
+    "company_id": {
+      "type": "string"
+    },
+    "company_name": {
+      "type": "string"
+    },
+    "patent_title": {
+      "type": "string"
+    },
+    "assignee": {
+      "type": "string"
+    },
+    "application_number": {
+      "type": "string"
+    },
+    "grant_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ipc_code": {
+      "type": "string",
+      "description": "May contain multiple semicolon-separated IPC codes."
+    },
+    "patent_type": {
+      "type": "string"
+    },
+    "legal_status": {
+      "type": "string"
+    },
+    "publication_date": {
+      "type": "date"
+    },
+    "patent_abstract": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "abstract_available": {
+      "type": "boolean"
+    },
+    "technology_field": {
+      "type": "string",
+      "description": "Enriched from companies.csv."
+    }
+  },
+  "schema_version": "1.0.0"
+}

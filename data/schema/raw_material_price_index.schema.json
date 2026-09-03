@@ -1,0 +1,21 @@
+{
+  "title": "Annual raw-material price reference",
+  "fields": {
+    "year": {
+      "type": "number"
+    },
+    "steel_price_index": {
+      "type": "number"
+    },
+    "copper_usd_per_ton": {
+      "type": "number"
+    },
+    "aluminum_usd_per_ton": {
+      "type": "number"
+    },
+    "crude_oil_usd_per_ton": {
+      "type": "number"
+    }
+  },
+  "schema_version": "1.0.0"
+}
