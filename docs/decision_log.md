@@ -2,7 +2,7 @@
 
 ## Public v1 decisions
 
-1. The public repository is a five-company methodological demo.
+1. The public repository provides a five-company reproducibility demo of the broader Kexintong technology-credit assessment framework.
 2. Demo and research execution are selected explicitly by separate entry points.
 3. Demo mode never trains GBM, regardless of sample size.
 4. `GradientBoostingRegressor` is identified consistently as GBM.
