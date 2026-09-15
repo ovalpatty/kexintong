@@ -170,7 +170,7 @@ The private research entry point is separate:
 python scripts/run_research.py --data-dir PATH_TO_PRIVATE_PREPARED_DATA
 ```
 
-> **Current repository status:** the `src/patent_scoring/` module is reserved for the collaborator responsible for patent valuation and NLP. The complete public run will become available after that module is contributed.
+> **Current repository status:** the patent valuation and NLP module is now implemented under `src/patent_scoring/` and integrated with the public workflow. Running `python scripts/run_demo.py` executes patent scoring first, followed by BEP, sensitivity, borrower-segmentation, pricing, and early-warning analysis on the bundled five-company sample.
 
 ## Limitations
 
