@@ -13,7 +13,7 @@ BEP分析与投保贷整合应用
 """
 
 import argparse
-import os, warnings, base64, json
+import os, warnings, base64, json, time
 from io import BytesIO
 import numpy as np
 import pandas as pd
@@ -70,6 +70,7 @@ def parse_args():
 
 
 ARGS = parse_args()
+RUN_STARTED_NS = time.time_ns()
 OUT = os.path.abspath(ARGS.output_dir)
 os.makedirs(OUT, exist_ok=True)
 REPORTS_DIR = os.path.join(OUT, 'reports')
@@ -1269,13 +1270,21 @@ outputs = sorted(
     os.path.relpath(os.path.join(root, filename), OUT)
     for root, _, filenames in os.walk(OUT)
     for filename in filenames
+    if filename != '.gitkeep'
+    and os.stat(os.path.join(root, filename)).st_mtime_ns >= RUN_STARTED_NS
 )
 total_size = 0
 for i, f in enumerate(outputs, 1):
     fp_full = os.path.join(OUT, f)
     sz = os.path.getsize(fp_full)
     total_size += sz
-    tag = '[PNG]' if f.endswith('.png') else '[HTML]' if f.endswith('.html') else '[XLSX]'
+    extension = os.path.splitext(f)[1].lower()
+    tag = {
+        '.png': '[PNG]',
+        '.html': '[HTML]',
+        '.xlsx': '[XLSX]',
+        '.json': '[JSON]',
+    }.get(extension, '[FILE]')
     print(f'  {i:2d}. {tag} {f:55s} {sz/1024:.1f}KB')
 
 print(f'\n共 {len(outputs)} 个文件，总计 {total_size/1024/1024:.1f}MB')

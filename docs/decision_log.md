@@ -10,3 +10,4 @@
 6. Explicit `value_basis` metadata takes precedence over heuristic inference.
 7. Demo and research outputs use separate directories and schemas.
 8. Historical full-sample outputs and machine-specific paths are not public-demo artifacts.
+9. A successful demo run exports a derived-only website payload after the analytical stages complete.

@@ -1,5 +1,5 @@
 {
-  "title": "Reported quarterly financial statements",
+  "title": "Reported-period financial statements with cumulative year-to-date flow values",
   "primary_key": [
     "company_id",
     "reporting_period"

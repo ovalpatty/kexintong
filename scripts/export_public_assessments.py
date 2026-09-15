@@ -25,7 +25,14 @@ def _number(value: object, digits: int = 2) -> float | None:
 
 
 def _english_risk(value: object) -> str:
-    text = str(value).replace("🟢", "").replace("🟠", "").replace("🔴", "").strip()
+    text = (
+        str(value)
+        .replace("🟢", "")
+        .replace("🟡", "")
+        .replace("🟠", "")
+        .replace("🔴", "")
+        .strip()
+    )
     mapping = {
         "正常": "Normal",
         "黄色预警": "Watch",
@@ -44,6 +51,9 @@ def _english_quadrant(value: object) -> str:
     return {
         "优质标的": "Strong technology / resilient finance",
         "双重风险": "Technology and finance watch",
+        "技术待变现": "Strong technology / finance watch",
+        "财务韧性强": "Resilient finance / lower technology score",
+        # Backward-compatible labels used by earlier research workbooks.
         "技术待提升": "Technology development watch",
         "稳健经营": "Financially resilient",
     }.get(text, text or "Not classified")
@@ -72,6 +82,7 @@ def _english_field(value: object) -> str:
 def _english_collateral(value: object) -> str:
     text = str(value).strip()
     return {
+        "建议争取认股权证，行权价设为当前估值×1.2，期限3年": "Seek a warrant where appropriate: exercise price at 1.2× current valuation; three-year term.",
         "可选择性设置认股权证，行权价×1.3，期限2年": "Selective warrant: exercise price ×1.3; two-year term.",
         "暂不建议设置认股权证": "No warrant is recommended.",
     }.get(text, "Refer to the approved credit policy.")
@@ -112,6 +123,7 @@ def export_payload(input_dir: Path, output_path: Path) -> Path:
             {
                 "company_id": company_id,
                 "company_name": _english_company(company_id, row.iloc[1]),
+                "company_name_cn": str(row.iloc[1]),
                 "technology_field": _english_field(row.iloc[2]),
                 "industry": _english_field(row.iloc[3]),
                 "assessment_period": "2026 Q1",

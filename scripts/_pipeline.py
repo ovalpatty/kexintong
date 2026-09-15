@@ -11,6 +11,8 @@ import subprocess
 import sys
 import time
 
+from export_public_assessments import export_payload
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PATENT_DIR = PROJECT_ROOT / "src" / "patent_scoring"
@@ -21,6 +23,7 @@ REQUIRED_INPUTS = {
     "patent_detail": "patent_records.xlsx",
     "high_value_patents": "high_value_patents.xlsx",
     "ipc_reference": "ipc_reference.xlsx",
+    "industry_reference": MACRO_FILENAME,
 }
 
 
@@ -56,10 +59,11 @@ def run_pipeline(*, mode: str, data_dir: Path, output_dir: Path) -> Path:
         "PATENT_OUTPUT_PATH": str(patent_report),
     })
 
-    print("\n[1/2] Patent scoring")
+    stage_total = 3 if mode == "demo" else 2
+    print(f"\n[1/{stage_total}] Patent scoring", flush=True)
     _run([sys.executable, str(PATENT_DIR / "main.py")], PATENT_DIR, env)
 
-    print(f"\n[2/2] BEP and credit analysis ({mode} mode)")
+    print(f"\n[2/{stage_total}] BEP and credit analysis ({mode} mode)", flush=True)
     _run(
         [
             sys.executable,
@@ -73,6 +77,14 @@ def run_pipeline(*, mode: str, data_dir: Path, output_dir: Path) -> Path:
         BEP_SCRIPT.parent,
         env,
     )
+
+    if mode == "demo":
+        print("\n[3/3] Derived website payload", flush=True)
+        payload_path = export_payload(
+            output_dir,
+            output_dir / "public" / "company_assessments.json",
+        )
+        print(f"Derived public assessment payload written to: {payload_path}")
 
     config_spec = importlib.util.spec_from_file_location(
         "kexintong_model_config", PATENT_DIR / "config.py"

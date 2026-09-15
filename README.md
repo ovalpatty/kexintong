@@ -51,7 +51,7 @@ The underlying study was developed on a private sample of 50 A-share companies a
 
 This repository uses five representative listed companies to reproduce the deterministic portion of the framework:
 
-- input-schema validation and financial-basis conversion;
+- schema-documented data ingestion and financial-basis conversion;
 - six-factor patent valuation;
 - analytical break-even-point analysis;
 - operating and raw-material sensitivity analysis;
@@ -125,11 +125,12 @@ See [`docs/methodology.md`](./docs/methodology.md) for the operational distincti
 
 ## Outputs
 
-The reproducibility workflow is organized around three output groups:
+The reproducibility workflow is organized around four output groups:
 
 - **Reports:** patent scoring, BEP analysis, and credit recommendations;
 - **Figures:** cost structure, patent/financial comparisons, sensitivity, and representative-company profiles;
-- **Interactive views:** borrower portfolio positioning and BEP time-series monitoring.
+- **Interactive views:** borrower portfolio positioning and BEP time-series monitoring;
+- **Website payload:** a derived-only company assessment JSON for the separate public interface.
 
 Curated reproducibility outputs belong in `outputs/examples/`. A local run writes fresh results to `outputs/latest/`, which is excluded from version control.
 
@@ -148,6 +149,7 @@ kexintong/
 │   └── generated/             # Local compatibility inputs
 ├── metadata/                  # Selection, quality and provenance records
 ├── docs/                      # Methodology and data dictionary
+├── tests/                     # Repository and data-contract regression checks
 ├── outputs/
 │   ├── examples/              # Curated public-workflow examples
 │   └── latest/                # Local run output; not committed
@@ -162,7 +164,7 @@ python -m pip install -r requirements.txt
 python scripts/run_demo.py
 ```
 
-The runner prepares internal compatibility files under `data/generated/` and writes current results to `outputs/latest/`.
+The runner prepares internal compatibility files under `data/generated/`, executes the integrated patent and financial analysis, and writes current results to `outputs/latest/`. It also creates `outputs/latest/public/company_assessments.json`, a derived-only payload for the separate public website.
 
 The private research entry point is separate:
 
@@ -170,7 +172,7 @@ The private research entry point is separate:
 python scripts/run_research.py --data-dir PATH_TO_PRIVATE_PREPARED_DATA
 ```
 
-> **Current repository status:** the patent valuation and NLP module is now implemented under `src/patent_scoring/` and integrated with the public workflow. Running `python scripts/run_demo.py` executes patent scoring first, followed by BEP, sensitivity, borrower-segmentation, pricing, and early-warning analysis on the bundled five-company sample.
+The patent valuation and NLP implementation lives under `src/patent_scoring/`. The public runner executes patent scoring first, followed by BEP, sensitivity, borrower-segmentation, pricing, early-warning analysis, and derived website-payload export on the bundled five-company sample.
 
 ## Limitations
 

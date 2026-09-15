@@ -37,4 +37,4 @@ The authoritative six-factor weights are stored once in `src/patent_scoring/conf
 
 Public-demo workbooks expose the analytical BEP measure only. Research workbooks additionally expose `BEP安全边际(GBM预测)`. The demo does not create empty model columns, model sheets, feature-importance placeholders, R² values, or model files.
 
-Every completed run writes `run_metadata.json`, including the selected mode, dataset label, normalization scope, score version, model-training flag, and generated file list.
+Every completed run writes `run_metadata.json`, including the selected mode, dataset label, normalization scope, score version, model-training flag, and generated file list. A completed demo run also exports `public/company_assessments.json` under its output directory; this file contains derived company-level assessments only and is intended for the separate public website.
