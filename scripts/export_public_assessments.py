@@ -88,7 +88,10 @@ def _english_collateral(value: object) -> str:
     }.get(text, "Refer to the approved credit policy.")
 
 
-def export_payload(input_dir: Path, output_path: Path) -> Path:
+def export_payload(input_dir: Path, output_path: Path, preparation_summary: dict | None = None) -> Path:
+    preparation_summary = preparation_summary or {}
+    financial_through = preparation_summary.get("financial_data_through", "Not specified")
+    patent_through = preparation_summary.get("patent_data_through", "Not specified")
     reports = input_dir / "reports"
     dimensions = pd.read_excel(reports / "patent_scoring_report.xlsx", sheet_name=6)
     summary = pd.read_excel(reports / "bep_analysis_results.xlsx", sheet_name=0)
@@ -126,7 +129,7 @@ def export_payload(input_dir: Path, output_path: Path) -> Path:
                 "company_name_cn": str(row.iloc[1]),
                 "technology_field": _english_field(row.iloc[2]),
                 "industry": _english_field(row.iloc[3]),
-                "assessment_period": "2026 Q1",
+                "assessment_period": f"Financials through {financial_through}; patents through {patent_through}",
                 "patent_score": _number(row.iloc[5]),
                 "credit_grade": str(row.iloc[4]),
                 "patent_dimensions": dimension_by_id.get(company_id, {}),
@@ -153,10 +156,13 @@ def export_payload(input_dir: Path, output_path: Path) -> Path:
         "payload_version": "1.0.0",
         "dataset_label": "Kexintong public demo - five-company sample",
         "assessment_type": "Derived technology credit assessment",
-        "as_of": "2026 Q1",
+        "financial_data_through": financial_through,
+        "patent_data_through": patent_through,
         "scope_note": (
             "This payload contains derived company-level assessments only. "
-            "It does not include raw patent, financial, IPC, or reference data."
+            "Financial and patent source records have different latest dates; "
+            "the dates are identified separately. It does not include raw "
+            "patent, financial, IPC, or reference data."
         ),
         "companies": companies,
     }
@@ -170,7 +176,9 @@ def main() -> None:
     parser.add_argument("--input-dir", type=Path, default=PROJECT_ROOT / "outputs" / "latest")
     parser.add_argument("--output", type=Path, default=PROJECT_ROOT / "outputs" / "latest" / "public" / "company_assessments.json")
     args = parser.parse_args()
-    output = export_payload(args.input_dir.resolve(), args.output.resolve())
+    summary_path = PROJECT_ROOT / "data" / "generated" / "input_preparation_summary.json"
+    summary = json.loads(summary_path.read_text(encoding="utf-8")) if summary_path.is_file() else {}
+    output = export_payload(args.input_dir.resolve(), args.output.resolve(), summary)
     print(f"Derived public assessment payload written to: {output}")
 
 

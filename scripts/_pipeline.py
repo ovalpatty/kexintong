@@ -44,6 +44,7 @@ def run_pipeline(*, mode: str, data_dir: Path, output_dir: Path) -> Path:
         raise ValueError(f"Unsupported mode: {mode}")
 
     started = time.time()
+    started_ns = time.time_ns()
     data_dir = data_dir.resolve()
     output_dir = output_dir.resolve()
     reports_dir = output_dir / "reports"
@@ -78,11 +79,19 @@ def run_pipeline(*, mode: str, data_dir: Path, output_dir: Path) -> Path:
         env,
     )
 
+    preparation_summary_path = data_dir / "input_preparation_summary.json"
+    preparation_summary = (
+        json.loads(preparation_summary_path.read_text(encoding="utf-8"))
+        if preparation_summary_path.is_file()
+        else {}
+    )
+
     if mode == "demo":
         print("\n[3/3] Derived website payload", flush=True)
         payload_path = export_payload(
             output_dir,
             output_dir / "public" / "company_assessments.json",
+            preparation_summary,
         )
         print(f"Derived public assessment payload written to: {payload_path}")
 
@@ -91,12 +100,6 @@ def run_pipeline(*, mode: str, data_dir: Path, output_dir: Path) -> Path:
     )
     model_config = importlib.util.module_from_spec(config_spec)
     config_spec.loader.exec_module(model_config)
-    preparation_summary_path = data_dir / "input_preparation_summary.json"
-    preparation_summary = (
-        json.loads(preparation_summary_path.read_text(encoding="utf-8"))
-        if preparation_summary_path.is_file()
-        else {}
-    )
 
     metadata = {
         "status": "success",
@@ -112,7 +115,9 @@ def run_pipeline(*, mode: str, data_dir: Path, output_dir: Path) -> Path:
         "outputs": sorted(
             str(path.relative_to(output_dir)).replace("\\", "/")
             for path in output_dir.rglob("*")
-            if path.is_file() and path.name != "run_metadata.json"
+            if path.is_file()
+            and path.name not in {"run_metadata.json", ".gitkeep"}
+            and path.stat().st_mtime_ns >= started_ns
         ),
     }
     metadata_path = output_dir / "run_metadata.json"

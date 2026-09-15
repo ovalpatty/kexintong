@@ -105,6 +105,15 @@ class RepositoryConsistencyTests(unittest.TestCase):
     def test_pipeline_checks_every_prepared_input(self):
         pipeline = (ROOT / "scripts" / "_pipeline.py").read_text(encoding="utf-8")
         self.assertIn('"industry_reference": MACRO_FILENAME', pipeline)
+        self.assertIn('path.stat().st_mtime_ns >= started_ns', pipeline)
+
+    def test_public_cutoff_dates_are_not_collapsed_to_one_quarter(self):
+        exporter = (ROOT / "scripts" / "export_public_assessments.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertNotIn('"as_of": "2026 Q1"', exporter)
+        self.assertIn('"financial_data_through": financial_through', exporter)
+        self.assertIn('"patent_data_through": patent_through', exporter)
 
     def test_bep_delivery_summary_excludes_stale_files(self):
         analysis = (ROOT / "src" / "bep_analysis" / "run_analysis.py").read_text(

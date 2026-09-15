@@ -272,6 +272,8 @@ def main() -> int:
         "patent_records": int(len(patents)),
         "financial_observations": int(len(financial)),
         "financial_transform": financial_basis,
+        "financial_data_through": f"{int(financial['fiscal_year'].max())} Q{int(financial.loc[financial['fiscal_year'].eq(financial['fiscal_year'].max()), 'fiscal_quarter'].max())}",
+        "patent_data_through": str(pd.to_datetime(patents["publication_date"], errors="coerce").max().date()),
         "reference_rows": {"high_value_patents": int(len(high_value)), "ipc_market": int(len(ipc)), "industry_bep": int(len(industry)), "raw_material": int(len(material))},
     }
     (adapted_dir / "input_preparation_summary.json").write_text(

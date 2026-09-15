@@ -113,7 +113,7 @@ Cost behavior is estimated from the company’s quarterly history. The resulting
 
 ### Research-Only Model Evaluation
 
-The complete study also evaluates a `GradientBoostingRegressor` using patent-derived and financial-structure features. The reported five-fold cross-validation result is:
+The complete study also evaluates a `GradientBoostingRegressor` using patent-derived and financial-structure features. The report gives the following five-fold cross-validation result for 49 usable modeling observations from the broader private research sample:
 
 ```text
 R² = 0.667 ± 0.113
@@ -164,7 +164,7 @@ python -m pip install -r requirements.txt
 python scripts/run_demo.py
 ```
 
-The runner prepares internal compatibility files under `data/generated/`, executes the integrated patent and financial analysis, and writes current results to `outputs/latest/`. It also creates `outputs/latest/public/company_assessments.json`, a derived-only payload for the separate public website.
+The runner prepares internal compatibility files under `data/generated/`, executes the integrated patent and financial analysis, and writes current results to `outputs/latest/`. It also creates `outputs/latest/public/company_assessments.json`, a derived-only payload for the separate public website. The bundled financial series ends at 2025 Q3, while the patent records extend into March 2026; the export identifies these cutoff dates separately.
 
 The private research entry point is separate:
 
